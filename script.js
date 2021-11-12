@@ -10,6 +10,33 @@ btn.addEventListener("click", function () {
   $header.classList.toggle("nav-open");
 });
 ////////////////////////////////////////////////////////////
+//sticky nav
+const heroEl = document.querySelector(".section-hero");
+
+const observer = new IntersectionObserver(
+  function (entries) {
+    const ent = entries[0];
+    console.log(!ent.isIntersecting);
+
+    if (!ent.isIntersecting) {
+      document.body.classList.add("sticky");
+    }
+
+    if (ent.isIntersecting) {
+      document.body.classList.remove("sticky");
+    }
+  },
+  {
+    roo: null, //obser inside of viewport
+    threshold: 0, //we have a event as soon the 0% of heroEl stay on the viewport
+    rootMargin: "-80px",
+  }
+);
+
+//making the observer observe
+observer.observe(heroEl);
+
+////////////////////////////////////////////////////////////
 //smooth scrolling animation
 
 const allLinks = document.querySelectorAll("a:link");
